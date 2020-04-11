@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Admin login/dashboard routes
+Route::get('/', 'AdminController@dashboard') -> name('admin.dashboard');
+Route::get('/admin', 'AdminController@dashboard') -> name('admin.dashboard');
+
+Route::get('/instalaciones', 'AdminController@instalaciones') -> name('admin.instalaciones');
+Route::get('/reparaciones', 'AdminController@reparaciones') -> name('admin.reparaciones');
+
+// Users' login or index route:  Route::get('/home', 'HomeController@index')->name('home');
+
+?>
