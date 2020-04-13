@@ -14,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Admin login/dashboard routes
 Route::get('/', 'AdminController@dashboard') -> name('admin.dashboard');
 Route::get('/admin', 'AdminController@dashboard') -> name('admin.dashboard');
+Route::get('/home', 'AdminController@dashboard')->name('admin.dashboard');
+Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
-Route::get('/instalaciones', 'AdminController@instalaciones') -> name('admin.instalaciones');
-Route::get('/reparaciones', 'AdminController@reparaciones') -> name('admin.reparaciones');
-
-// Users' login or index route:  Route::get('/home', 'HomeController@index')->name('home');
+// Atajo para establecer las 7 rutas básicas de un recurso (index, show, create, store, edit, update, destroy)
+Route::resource('instalaciones', 'Admin\InstalacionController');
+Route::resource('reparaciones', 'Admin\ReparacionController');
+Route::resource('usuarios', 'Admin\UsuarioController');
 
 ?>

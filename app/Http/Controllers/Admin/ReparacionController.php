@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use App\Reparacion;
 
 class ReparacionController extends Controller
 {
@@ -14,7 +17,10 @@ class ReparacionController extends Controller
      */
     public function index()
     {
-        //
+        $reparaciones = Reparacion::all();
+        $argumentos = array();
+        $argumentos['reparaciones'] = $reparaciones;
+        return view('admin.reparaciones.index', $argumentos);
     }
 
     /**
@@ -24,7 +30,7 @@ class ReparacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.reparaciones.create');
     }
 
     /**
@@ -35,7 +41,20 @@ class ReparacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reparaciones = new Reparacion();
+        $reparaciones -> id_user = $request -> input('id_user');
+        $reparaciones -> estado = $request -> input('estado');
+        $reparaciones -> foto = $request -> input('foto');
+        $reparaciones -> descripcion = $request -> input('descripcion');
+        $reparaciones -> fecha_hora = $request -> input('fecha_hora');
+        $reparaciones -> ubicacion = $request -> input('ubicacion');
+
+        if($reparaciones -> save())
+        {
+            return redirect() -> route('reparaciones.index') -> with('success', 'La reparación fue guardada correctamente');
+        }
+        // In case the if() doesn't finish the execution of the code with the return, then cookies will be used to validate 
+        return redirect() -> route('reparaciones.index') -> with('failure', 'La reparación no pudo ser guardada correctamente');
     }
 
     /**
@@ -46,7 +65,17 @@ class ReparacionController extends Controller
      */
     public function show($id)
     {
-        //
+        // Find primary key
+        $reparaciones = Reparacion::find($id);
+        
+        if($reparaciones)
+        {
+            $argumentos = array();
+            $argumentos['reparaciones'] = $reparaciones;
+            return view('admin.reparaciones.show', $argumentos);
+        }
+        
+        return redirect() -> route('reparaciones.index' -> with('failure', 'No se encontró la reparación'));
     }
 
     /**
@@ -57,7 +86,17 @@ class ReparacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Find primary key
+        $reparaciones = Reparacion::find($id);
+
+        if($reparaciones)
+        {
+            $argumentos = array();
+            $argumentos['reparaciones'] = $reparaciones;
+            return view('admin.reparaciones.edit', $argumentos);
+        }
+        
+        return redirect() -> route('reparaciones.index' -> with('failure', 'No se encontró la reparación'));
     }
 
     /**
@@ -69,7 +108,26 @@ class ReparacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Busca un registro a partir de la llave primaria (SELECT * FROM Noticia)
+        $reparaciones = Reparacion::find($id);
+        if($reparaciones)
+        {
+            $reparaciones -> id_user = $request -> input('id_user');
+            $reparaciones -> estado = $request -> input('estado');
+            $reparaciones -> foto = $request -> input('foto');
+            $reparaciones -> descripcion = $request -> input('descripcion');
+            $reparaciones -> fecha_hora = $request -> input('fecha_hora');
+            $reparaciones -> ubicacion = $request -> input('ubicacion');
+            
+            if($reparaciones -> save())
+            {
+                return redirect() -> route('reparaciones.edit', $id) -> with('success', 'La reparación se actualizó exitosamente');
+            }
+            // If reparación can't be updated
+            return redirect() -> route('reparaciones.edit', $id) -> with('failure', 'No se pudo actualizar la reparación');
+        }
+        // If reparación isn't even found
+        return redirect() -> route('reparaciones.index') -> with('failure', 'No se encontró la reparación');
     }
 
     /**
@@ -80,6 +138,14 @@ class ReparacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reparaciones = Reparacion::find($id);
+        
+        if($reparaciones) {
+            if($reparaciones -> delete()){
+                return redirect() -> route('reparaciones.index') -> with('exito', 'Reparación eliminada exitosamente');
+            }
+            return redirect() -> route('reparaciones.index') ->with('failure', 'No se pudo eliminar la reparación');
+        }
+        return redirect() -> route('reparaciones.index') -> with('failure', 'No se encontró la reparación');
     }
 }

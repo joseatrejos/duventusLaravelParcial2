@@ -17,16 +17,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the admin's login screen.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
-    /**
      * Show the admin's dashboard.
      * view( directory.file )
      *
@@ -36,25 +26,4 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-
-    /**
-     * Show the installation registries.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function instalaciones ()
-    {
-        return view('admin.instalaciones');
-    }
-
-    /**
-     * Show the reparation registries.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function reparaciones ()
-    {
-        return view('admin.reparaciones');
-    }
-    
 }
