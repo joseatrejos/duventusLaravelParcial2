@@ -60,13 +60,28 @@
                 </div>
             @endif
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="text-md-right dataTables_filter" id="dataTable_filter">
-                        <input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search">
+            <form action="/searchUsuarios">
+                <div class="row">
+                    <div class="col-md-4">
+                        <select name="filtro" class="form-control" data-toggle="dropdown" aria-expanded="false">
+                            <option value="usertype" class="dropdown-item" role="presentation">Filtrar por tipo de usuario</option>
+                            <option value="name" class="dropdown-item" role="presentation">Filtrar por nombre</option>
+                            <option value="email" class="dropdown-item" role="presentation">Filtrar por correo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <input type="text" name="search" class="form-control" aria-controls="dataTable" placeholder="Buscar...">
+                    </div>
+
+                    <div class="col-md-4">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
+            
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table dataTable my-0" id="dataTable">
                     <thead>

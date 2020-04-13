@@ -27,4 +27,9 @@ Route::resource('instalaciones', 'Admin\InstalacionController');
 Route::resource('reparaciones', 'Admin\ReparacionController');
 Route::resource('usuarios', 'Admin\UsuarioController');
 
+// Search route
+Route::get('/searchInstalaciones', 'Admin\InstalacionController@search');
+Route::get('/searchReparaciones', 'Admin\ReparacionController@search');
+Route::get('/searchUsuarios', 'Admin\UsuarioController@search');
+
 ?>

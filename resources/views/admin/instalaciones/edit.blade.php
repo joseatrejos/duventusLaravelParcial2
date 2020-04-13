@@ -33,7 +33,7 @@
     <h3 class="text-dark mb-4">Instalaciones</h3>
     <div class="card shadow">
         <div class="card-header py-3">
-                Registro #{{ $instalaciones -> id}}
+            Registro #{{ $instalaciones -> id}}
         </div>
 
         <div class="card-body">

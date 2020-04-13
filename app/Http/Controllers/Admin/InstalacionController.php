@@ -24,6 +24,37 @@ class InstalacionController extends Controller
     }
 
     /**
+     * Display a list of items depending on the search criteria.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // Search terms
+        $filter = $request -> input('filtro');
+        $search = $request -> input('search');
+
+        // Retrieval of the data according to the search terms
+        if($filter == "fecha")
+        {
+            $instalaciones = Instalacion::where('fecha_hora', 'LIKE', '%' . $search . '%')->get();
+        }
+        else if($filter == "estado")
+        {
+            $instalaciones = Instalacion::where('estado', 'LIKE', '%' . $search . '%')->get();
+        } 
+        else if($filter == "usuario")
+        {
+            $instalaciones = Instalacion::where('id_user', 'LIKE', '%' . $search . '%')->get();
+        }
+        
+        // Data arguments with which to refresh the index page
+        $argumentos = array();
+        $argumentos['instalaciones'] = $instalaciones;
+        return view('admin.instalaciones.index', $argumentos);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

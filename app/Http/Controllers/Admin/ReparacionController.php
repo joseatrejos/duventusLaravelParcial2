@@ -131,6 +131,37 @@ class ReparacionController extends Controller
     }
 
     /**
+     * Display a list of items depending on the search criteria.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // Search terms
+        $filter = $request -> input('filtro');
+        $search = $request -> input('search');
+
+        // Retrieval of the data according to the search terms
+        if($filter == "fecha")
+        {
+            $reparaciones = Reparacion::where('fecha_hora', 'LIKE', '%' . $search . '%')->get();
+        }
+        else if($filter == "estado")
+        {
+            $reparaciones = Reparacion::where('estado', 'LIKE', '%' . $search . '%')->get();
+        } 
+        else if($filter == "usuario")
+        {
+            $reparaciones = Reparacion::where('id_user', 'LIKE', '%' . $search . '%')->get();
+        }
+        
+        // Data arguments with which to refresh the index page
+        $argumentos = array();
+        $argumentos['reparaciones'] = $reparaciones;
+        return view('admin.reparaciones.index', $argumentos);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

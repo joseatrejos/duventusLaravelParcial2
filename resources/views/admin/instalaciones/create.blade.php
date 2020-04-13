@@ -64,7 +64,7 @@
                     <label>
                         ID Usuario
                     </label>
-
+                    
                     <input type="text" name="id_user" class="form-control"></input>
                 </div>
 
