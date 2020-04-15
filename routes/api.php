@@ -20,5 +20,5 @@ Route::apiResource('instalaciones', 'InstalacionApiController');
 Route::apiResource('reparaciones', 'ReparacionApiController');
 
 // API Searches
-Route::get('instalacionesterminadas', 'InstalacionApiController@search');
-Route::get('reparacionesterminadas', 'ReparacionApiController@search');
+Route::get('instalacionesfiltradas', 'InstalacionApiController@search');
+Route::get('reparacionesfiltradas', 'ReparacionApiController@search');

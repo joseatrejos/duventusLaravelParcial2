@@ -22,7 +22,6 @@ class InstalacionApiController extends Controller
         // Solicitud de Información
         $instalaciones = Instalacion::all();
 
-
         // Envío de respuesta
         return $instalaciones;
     }
@@ -74,17 +73,17 @@ class InstalacionApiController extends Controller
      */
     public function store(Request $request)
     {
-        $nuevaInstalacion = new Instalacion();
-        $nuevaInstalacion -> id_user = $request -> user() -> id;
-        $nuevaInstalacion -> estado = $request -> input('estado');
-        $nuevaInstalacion -> foto = $request -> input('foto');
-        $nuevaInstalacion -> fecha_hora = $request -> input('fecha_hora');
-        $nuevaInstalacion -> ubicacion = $request -> input('ubicacion');
+        $instalaciones = new Instalacion();
+        $instalaciones -> id_user = $request -> user() -> id;
+        $instalaciones -> estado = $request -> input('estado');
+        $instalaciones -> foto = $request -> input('foto');
+        $instalaciones -> fecha_hora = $request -> input('fecha_hora');
+        $instalaciones -> ubicacion = $request -> input('ubicacion');
         
-        // Arma una respuesta
+        // Contrucción de la respuesta
         $respuesta = array();
         $respuesta['exito'] = false;
-        if($nuevaInstalacion -> save()){
+        if($instalaciones -> save()){
             $respuesta['exito'] = true;
         }
 
@@ -104,7 +103,6 @@ class InstalacionApiController extends Controller
         $instalaciones = Instalacion::find($id);
 
         if($instalaciones){
-
             $respuesta = array();
             $respuesta['instalaciones'] = $instalaciones;
         } 

@@ -131,7 +131,7 @@ class ReparacionApiController extends Controller
         $reparaciones -> fecha_hora = $request -> input('fecha_hora');
         $reparaciones -> ubicacion = $request -> input('ubicacion');
 
-        // Arma una respuesta
+        // Contrucción de la respuesta
         $respuesta = array();
         $respuesta['exito'] = false;
         if($reparaciones -> save()){
