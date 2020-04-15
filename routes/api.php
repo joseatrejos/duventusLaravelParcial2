@@ -14,17 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) { return $request->user();});
-
-/*
-Route::middleware('auth:api') -> get('/instalaciones', 'InstalacionApiController@usuario');
-Route::middleware('auth:api') -> get('/reparaciones', 'ReparacionApiController@usuario');
-Route::middleware('auth:api') -> get('/usuario', 'UsuarioApiController@usuario');
-
-// ??
-Route::middleware('auth:api') -> post('/suma', 'UsuarioApiController@suma'); */
-
 // API Resources
+Route::apiResource('instalaciones10', 'Instalacion10ApiController');
 Route::apiResource('instalaciones', 'InstalacionApiController');
 Route::apiResource('reparaciones', 'ReparacionApiController');
-Route::apiResource('usuarios', 'UsuarioApiController');
+
+// API Searches
+Route::get('instalacionesterminadas', 'InstalacionApiController@search');
+Route::get('reparacionesterminadas', 'ReparacionApiController@search');

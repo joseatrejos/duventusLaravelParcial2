@@ -19,26 +19,50 @@ class InstalacionApiController extends Controller
      */
     public function index(Request $request)
     {
-        // Cada respuesta regresa 20 casas
-
         // Solicitud de Información
-        $paginaActual = intval( $request -> input('pagina') );
-        if(!$paginaActual) {
-            $paginaActual = 1;
-        }
-        $numeroInstalaciones = Instalacion::count();
-        $numeroPaginas = ceil($numeroInstalaciones / 20);
+        $instalaciones = Instalacion::all();
 
-        $instalaciones = Instalacion::where('id_user', $request -> user() -> id) -> skip( ($paginaActual - 1) * 20 ) -> take(20) -> get();
-
-        // Construcción de respuesta
-        $respuesta = array();
-        $respuesta['total'] = $numeroInstalaciones;
-        $respuesta['paginas'] = $numeroPaginas;
-        $respuesta['pagina_actual'] = $paginaActual;
-        $respuesta['instalaciones'] = $instalaciones;
 
         // Envío de respuesta
+        return $instalaciones;
+    }
+
+    /**
+     * Display a list of items depending on the search criteria.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // Search terms
+        $filter = $request -> input('filtro');
+        $search = $request -> input('fecha');
+
+        // Retrieval of the data according to the search terms
+        if($filter == "pendientes" || $filter == "Pendientes" || $filter == "pendiente" || $filter == "Pendiente")
+        {
+            $instalaciones = Instalacion::where([
+                ['id_user','=', $request->user()->id],
+                ['estado','=', 'Pendiente'],
+                ['fecha_hora', 'LIKE',  '%' . $search . '%']
+                ])->get();
+        }
+        else if($filter == "terminadas" || $filter == "Terminadas" || $filter == "terminado" || $filter == "Terminado")
+        {
+            $instalaciones = Instalacion::where([
+                ['id_user','=', $request->user()->id],
+                ['estado','=', 'Terminado'],
+                ['fecha_hora', 'LIKE',  '%' . $search . '%']
+                ])->get();
+        } else 
+        {
+            return "No se encontró ningun registro";
+        }
+        
+        // Construcción del JSON de respuesta
+        $respuesta = array();
+        $respuesta['instalaciones'] = $instalaciones;
+        
         return $respuesta;
     }
 
@@ -76,7 +100,18 @@ class InstalacionApiController extends Controller
      */
     public function show($id)
     {
-        //
+        // Find primary key
+        $instalaciones = Instalacion::find($id);
+
+        if($instalaciones){
+
+            $respuesta = array();
+            $respuesta['instalaciones'] = $instalaciones;
+        } 
+        else 
+            $respuesta['instalaciones']= "No se encontro la instalación";
+
+        return $respuesta;
     }
 
     /**
@@ -88,7 +123,22 @@ class InstalacionApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $instalaciones = Instalacion::find($id);
+        $instalaciones -> id_user = $request -> input('id_user');
+        $instalaciones -> estado = $request -> input('estado');
+        $instalaciones -> foto = $request -> input('foto');
+        $instalaciones -> fecha_hora = $request -> input('fecha_hora');
+        $instalaciones -> ubicacion = $request -> input('ubicacion');
+
+        // Arma una respuesta
+        $respuesta = array();
+        $respuesta['exito'] = false;
+        if($instalaciones -> save()){
+            $respuesta['exito'] = true;
+        }
+
+        // Regresa una respuesta
+        return $respuesta;
     }
 
     /**
