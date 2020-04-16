@@ -79,6 +79,14 @@ class InstalacionController extends Controller
         $instalaciones -> fecha_hora = $request -> input('fecha_hora');
         $instalaciones -> ubicacion = $request -> input('ubicacion');
 
+        // Photo File verification and upload with its path's string
+        if($request -> hasFile('foto')) {
+            $archivoProfile = $request -> file('foto');
+            $rutaArchivo = $archivoProfile -> store('public\instalacion');
+            $rutaArchivo = substr($rutaArchivo, 19);
+            $instalaciones -> foto = $rutaArchivo;
+        }
+
         if($instalaciones -> save())
         {
             return redirect() -> route('instalaciones.index') -> with('success', 'La instalación fue guardada correctamente');
@@ -147,6 +155,14 @@ class InstalacionController extends Controller
             $instalaciones -> foto = $request -> input('foto');
             $instalaciones -> fecha_hora = $request -> input('fecha_hora');
             $instalaciones -> ubicacion = $request -> input('ubicacion');
+
+            // Photo File verification and upload with its path's string
+            if($request -> hasFile('foto')) {
+                $archivoProfile = $request -> file('foto');
+                $rutaArchivo = $archivoProfile -> store('public\instalacion');
+                $rutaArchivo = substr($rutaArchivo, 19);
+                $instalaciones -> foto = $rutaArchivo;
+            }
             
             if($instalaciones -> save())
             {

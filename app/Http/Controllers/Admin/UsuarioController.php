@@ -76,7 +76,15 @@ class UsuarioController extends Controller
         $usuarios -> usertype = $request -> input('usertype');
         $usuarios -> name = $request -> input('name');
         $usuarios -> email = $request -> input('email');
-        $usuarios -> password = bcrypt($request->input('password'));
+        $usuarios -> password = bcrypt($request -> input('password'));
+
+        // Photo File verification and upload with its path's string
+        if($request -> hasFile('foto')) {
+            $archivoUsuario = $request -> file('foto');
+            $rutaArchivo = $archivoUsuario -> store('public\usuario');
+            $rutaArchivo = substr($rutaArchivo, 15);
+            $usuarios -> foto = $rutaArchivo;
+        }
 
         if($usuarios -> save())
         {
@@ -144,7 +152,15 @@ class UsuarioController extends Controller
             $usuarios -> usertype = $request -> input('usertype');
             $usuarios -> name = $request -> input('name');
             $usuarios -> email = $request -> input('email');
-            $usuarios -> password = bcrypt($request->input('password'));
+            $usuarios -> password = bcrypt($request -> input('password'));
+
+            // Photo File verification and upload with its path's string
+            if($request -> hasFile('foto')) {
+                $archivoUsuario = $request -> file('foto');
+                $rutaArchivo = $archivoUsuario -> store('public\usuario');
+                $rutaArchivo = substr($rutaArchivo, 15);
+                $usuarios -> foto = $rutaArchivo;
+            }
 
             if($usuarios -> save())
             {

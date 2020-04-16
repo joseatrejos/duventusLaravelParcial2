@@ -100,7 +100,7 @@
                             <td>{{ $usuario -> id}}</td>
                             <td>{{ $usuario -> usertype}}</td>
                             <td>{{ $usuario -> name}}</td>
-                            <td> <img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="" /></td>
+                            <td><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="/storage/usuario/{{ $usuario -> foto }}" /></td>
                             <td>{{ $usuario -> email}}</td>
                             <td>
                                 <div class="btn-group" role="group">

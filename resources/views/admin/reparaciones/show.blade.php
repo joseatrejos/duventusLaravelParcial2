@@ -75,7 +75,7 @@
                             <td class="">{{ $reparaciones -> id}}</td>
                             <td class="">{{ $reparaciones -> id_user}}</td>
                             <td class="">{{ $reparaciones -> estado}}</td>
-                            <td class="d-lg-flex"><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src=""></td>
+                            <td><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="/storage/reparacion/{{ $reparaciones -> foto }}" /></td>
                             <td class="">{{ $reparaciones -> fecha_hora}}</td>
                             <td class="">{{ $reparaciones -> ubicacion}}</td>
                         </tr>

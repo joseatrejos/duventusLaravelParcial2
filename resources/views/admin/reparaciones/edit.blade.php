@@ -87,7 +87,7 @@
                         Foto
                     </label>
 
-                    <input type="file" name="foto" class="form-control" value="{{ $reparaciones -> foto }}"></input>
+                    <input type="file" name="foto" class="form-control"></input>
                 </div>
                 
                 <div class="form-group">

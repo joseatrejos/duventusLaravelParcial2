@@ -101,7 +101,7 @@
                             <td>{{ $instalacion -> id}}</td>
                             <td>{{ $instalacion -> id_user}}</td>
                             <td>{{ $instalacion -> estado}}</td>
-                            <td> <img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="" /></td>
+                            <td><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="/storage/instalacion/{{ $instalacion -> foto }}" /></td>
                             <td>{{ $instalacion -> fecha_hora}}</td>
                             <td>{{ $instalacion -> ubicacion}}</td>
                             <td>

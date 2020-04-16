@@ -74,7 +74,7 @@
                             <td class="">{{ $usuarios -> id}}</td>
                             <td class="">{{ $usuarios -> usertype}}</td>
                             <td class="">{{ $usuarios -> name}}</td>
-                            <td class="d-lg-flex"><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src=""></td>
+                            <td><img class="rounded-circle d-lg-flex mr-2" width="30" height="30" src="/storage/usuario/{{ $usuarios -> foto }}" /></td>
                             <td class="">{{ $usuarios -> email}}</td>
                         </tr>
                     </tbody>

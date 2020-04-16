@@ -49,6 +49,14 @@ class ReparacionController extends Controller
         $reparaciones -> fecha_hora = $request -> input('fecha_hora');
         $reparaciones -> ubicacion = $request -> input('ubicacion');
 
+        // Photo File verification and upload with its path's string
+        if($request -> hasFile('foto')) {
+            $archivoProfile = $request -> file('foto');
+            $rutaArchivo = $archivoProfile -> store('public\reparacion');
+            $rutaArchivo = substr($rutaArchivo, 18);
+            $reparaciones -> foto = $rutaArchivo;
+        }
+
         if($reparaciones -> save())
         {
             return redirect() -> route('reparaciones.index') -> with('success', 'La reparación fue guardada correctamente');
@@ -118,6 +126,14 @@ class ReparacionController extends Controller
             $reparaciones -> descripcion = $request -> input('descripcion');
             $reparaciones -> fecha_hora = $request -> input('fecha_hora');
             $reparaciones -> ubicacion = $request -> input('ubicacion');
+
+            // Photo File verification and upload with its path's string
+            if($request -> hasFile('foto')) {
+                $archivoProfile = $request -> file('foto');
+                $rutaArchivo = $archivoProfile -> store('public\reparacion');
+                $rutaArchivo = substr($rutaArchivo, 18);
+                $reparaciones -> foto = $rutaArchivo;
+            }
             
             if($reparaciones -> save())
             {

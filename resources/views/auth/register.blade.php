@@ -13,7 +13,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input id="usertype" type="hidden" value="usuario" name="usertype" >
+                                <input id="usertype" type="hidden" value="Usuario" name="usertype" >
                             </div>
                         </div>
 

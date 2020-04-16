@@ -69,7 +69,7 @@
                     <select name="usertype" class="form-control" data-toggle="dropdown" aria-expanded="false">
                         <option value="{{ $usuarios -> usertype }}" class="dropdown-item" role="presentation">{{ $usuarios -> usertype }}</option>
                         
-                        @if($usuarios->usertype == "Administrador")
+                        @if($usuarios -> usertype == "Administrador")
                         <option value="Usuario" class="dropdown-item" role="presentation">Usuario</option>
                         @else
                         <option value="Administrador" class="dropdown-item" role="presentation">Administrador</option>
@@ -91,7 +91,7 @@
                         Foto
                     </label>
 
-                    <input type="file" name="foto" class="form-control" value="{{ $usuarios -> foto }}"></input>
+                    <input type="file" name="foto" class="form-control"></input>
                 </div>
                 
                 <div class="form-group">
