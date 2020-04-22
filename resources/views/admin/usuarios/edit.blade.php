@@ -58,7 +58,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{route('usuarios.update', $usuarios -> id)}}">
+            <form method="POST" enctype="multipart/form-data" action="{{route('usuarios.update', $usuarios -> id)}}">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

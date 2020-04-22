@@ -58,7 +58,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{route('instalaciones.update', $instalaciones -> id)}}">
+            <form method="POST" action="{{route('instalaciones.update', $instalaciones -> id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -87,7 +87,7 @@
                         Foto
                     </label>
 
-                    <input type="file" name="foto" class="form-control" value="{{ $instalaciones -> foto }}"></input>
+                    <input type="file" name="foto" class="form-control"></input>
                 </div>
                 
                 <div class="form-group">

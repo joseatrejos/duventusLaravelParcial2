@@ -58,7 +58,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{route('reparaciones.update', $reparaciones -> id)}}">
+            <form method="POST" enctype="multipart/form-data" action="{{route('reparaciones.update', $reparaciones -> id)}}">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
