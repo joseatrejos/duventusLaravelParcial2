@@ -10,6 +10,7 @@ class InstalacionApiController extends Controller
     public function __construct()
     {
         $this -> middleware('auth:api');
+        $this -> middleware('userapi');
     }
 
     /**
@@ -53,9 +54,15 @@ class InstalacionApiController extends Controller
                 ['estado','=', 'Terminado'],
                 ['fecha_hora', 'LIKE',  '%' . $search . '%']
                 ])->get();
-        } else 
+        } else if($filter == ""){
+            $instalaciones = Instalacion::where([
+                ['id_user','=', $request->user()->id],
+                ['fecha_hora', 'LIKE',  '%' . $search . '%']
+                ])->get();
+        }
+        else
         {
-            return "No se encontró ningun registro";
+            return "No se filtraron registros pendientes ni terminados";
         }
         
         // Construcción del JSON de respuesta
@@ -122,7 +129,7 @@ class InstalacionApiController extends Controller
     public function update(Request $request, $id)
     {
         $instalaciones = Instalacion::find($id);
-        $instalaciones -> id_user = $request -> input('id_user');
+        $instalaciones -> id_user = $request -> user() -> id;
         $instalaciones -> estado = $request -> input('estado');
         $instalaciones -> foto = $request -> input('foto');
         $instalaciones -> fecha_hora = $request -> input('fecha_hora');

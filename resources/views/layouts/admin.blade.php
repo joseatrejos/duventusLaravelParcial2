@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height:100%;">
 
 <head>
     <meta charset="utf-8">
@@ -14,10 +14,14 @@
     <link rel="stylesheet" href="/fonts/fontawesome5-overrides.min.css">
 </head>
 
-<body id="page-top">
+<body id="page-top" style="height:100%;">
     <div id="wrapper">
         
-        @yield('navbar')
+        @if(Auth::user() -> usertype == "Administrador")
+        
+            @yield('navbar')
+        
+        @endif
 
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
@@ -51,13 +55,25 @@
                 <div class="container-fluid">
                     @yield('contenido')
                 </div>
+                @if(Auth::user() -> usertype == "Usuario")
+                    <div class="container-fluid" style="height:100%;">
+                        <p class="text-center">
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                            No eres un administrador
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                            
+                        </p>
+                    </div>
+                @endif
             </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Brand 2020</span></div>
-            </div>
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2020</span></div>
+                </div>
+            </footer>
+        </div>
+
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

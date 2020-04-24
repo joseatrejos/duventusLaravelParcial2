@@ -20,5 +20,12 @@ Route::apiResource('instalaciones', 'InstalacionApiController');
 Route::apiResource('reparaciones', 'ReparacionApiController');
 
 // API Searches
-Route::get('instalacionesfiltradas', 'InstalacionApiController@search');
-Route::get('reparacionesfiltradas', 'ReparacionApiController@search');
+Route::get('/instalacionesfiltradas', 'InstalacionApiController@search');
+Route::get('/reparacionesfiltradas', 'ReparacionApiController@search');
+
+// Admin Invalidation at API Sign-in
+Route::get('/soloTrabajadores',
+    function() {
+        return ["mensaje" => "Este servicio es solo para trabajadores locooo"];
+    }
+)->name('api.soloTrabajadores');

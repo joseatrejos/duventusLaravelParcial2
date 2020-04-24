@@ -10,6 +10,7 @@ class ReparacionApiController extends Controller
     public function __construct()
     {
         $this -> middleware('auth:api');
+        $this -> middleware('userapi');
     }
 
     /**
@@ -124,16 +125,20 @@ class ReparacionApiController extends Controller
     public function update(Request $request, $id)
     {
         $reparaciones = Reparacion::find($id);
-        $reparaciones -> id_user = $request -> input('id_user');
-        $reparaciones -> estado = $request -> input('estado');
-        $reparaciones -> foto = $request -> input('foto');
-        $reparaciones -> descripcion = $request -> input('descripcion');
-        $reparaciones -> fecha_hora = $request -> input('fecha_hora');
-        $reparaciones -> ubicacion = $request -> input('ubicacion');
+
+        if($reparaciones){
+            $reparaciones -> id_user = $request -> user() -> id;
+            $reparaciones -> estado = $request -> input('estado');
+            $reparaciones -> foto = $request -> input('foto');
+            $reparaciones -> descripcion = $request -> input('descripcion');
+            $reparaciones -> fecha_hora = $request -> input('fecha_hora');
+            $reparaciones -> ubicacion = $request -> input('ubicacion');
+        }
 
         // Contrucción de la respuesta
         $respuesta = array();
         $respuesta['exito'] = false;
+
         if($reparaciones -> save()){
             $respuesta['exito'] = true;
         }
