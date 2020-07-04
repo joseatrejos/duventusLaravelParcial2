@@ -60,7 +60,7 @@
                 </div>
             @endif
 
-            <form >
+            <form action="/searchInstalaciones">
                 <div class="row">
                     <div class="col-md-4">
                         <select name="filtro" class="form-control" data-toggle="dropdown" aria-expanded="false">
